@@ -13,7 +13,7 @@ class Ad(models.Model):
    Объявления должны быть отсортированы по дате создания (чем новее, тем выше).
     """
 
-    title = models.CharField(max_length=150, default="нет названия товара",
+    title = models.CharField(max_length=150,
                              verbose_name="название товара", help_text="Укажите название товара"
                              )
     price = models.PositiveIntegerField(
@@ -29,12 +29,11 @@ class Ad(models.Model):
         null=True,
         verbose_name="Автор",
         help_text="Автор объявления",
-    )
+        )
     image = models.ImageField(upload_to="ads/", verbose_name="фото товара", help_text="Загрузите фото товара",
                               blank=True, null=True)
-    created_at = models.DateField(
-        models.DateTimeField(default=timezone.now, verbose_name="дата и время создания")
-    )
+    created_at = models.DateTimeField(default=timezone.now, verbose_name="дата и время создания", blank=True, null=True)
+
 
     def __str__(self):
         return f"{self.title} - {self.price}"
@@ -42,7 +41,7 @@ class Ad(models.Model):
     class Meta:
         verbose_name = "объявление"
         verbose_name_plural = "объявления"
-        ordering = ('-created_at',)
+       # ordering = ('-created_at',)
 
 
 class Comment(models.Model):
@@ -63,9 +62,8 @@ class Comment(models.Model):
     )
     ad = models.ForeignKey(Ad, related_name='comment_ad', on_delete=models.CASCADE,
                            verbose_name='объявление, под которым оставлен отзыв', null=True, blank=True)
-    created_at = models.DateField(
-        models.DateTimeField(default=timezone.now, verbose_name="дата и время создания")
-    )
+    created_at = models.DateTimeField(default=timezone.now, verbose_name="дата и время создания", null=True, blank=True)
+
 
     def __str__(self):
         return f"Отзыв от {self.created_at} написан {self.author}"
@@ -73,4 +71,4 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "отзыв"
         verbose_name_plural = "отзывы"
-        ordering = ('-created_at',)
+       # ordering = ('-created_at',)
