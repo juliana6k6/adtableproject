@@ -21,7 +21,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class AdDetailSerializer(serializers.ModelSerializer):
     """Сериализатор для детального просмотра одного объявления"""
 
-    # comment = CommentSerializer(source='comment_ad', read_only=True, many=True)
+    comment = CommentSerializer(source='comment_ad', read_only=True, many=True)
 
     class Meta:
         model = Ad

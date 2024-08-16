@@ -1,5 +1,8 @@
-# from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, viewsets
+
+from ads.filters import AdFilter
 # from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from ads.models import Ad, Comment
@@ -24,6 +27,8 @@ class AdListAPIView(generics.ListAPIView):
     """Контроллер для просмотра списка всех объявлений"""
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = AdFilter
     # permission_classes = [AllowAny]
 
 
