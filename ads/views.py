@@ -71,12 +71,20 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
+    # def perform_create(self, serializer):
+    #     """Метод для автоматической привязки отзыва к создателю и к конкретному объявлению"""
+    #     comment = serializer.save()
+    #     comment.author = self.request.user
+    #     comment.ad = Ad.objects.get(pk=self.kwargs["ad_pk"])
+    #     comment.save()
     # def get_queryset(self):
     #     """Метод для получения отзывов у определенного объявления"""
-    #     ad_id = self.kwargs.get("ad_pk")
-    #     ad = get_object_or_404(Ad, id=ad_id)
+    #     ad_pk = self.kwargs.get("ad_pk")
+    #     ad = get_object_or_404(Ad, id=ad_pk)
     #     comment_list = ad.comment_ad.all()
-    #     return comment_list.order_by("created_at")
+    #     return comment_list
+    # #comment_pk = self.kwargs.get('pk')
+    # #serializer.save(author=self.request.user, ad=ad_for_comment, pk=comment_pk)
 
     # def get_permissions(self):
     #     """Создавать и просматривать может любой авторизованный пользователь, а редактировать
@@ -90,9 +98,4 @@ class CommentViewSet(viewsets.ModelViewSet):
     #         # permission_classes = [AllowAny]
     #     return [permission() for permission in permission_classes]
 
-    # def perform_create(self, serializer):
-    #     """Метод для автоматической привязки отзыва к создателю у конкретного объявления"""
-    #     comment = serializer.save()
-    #     comment.author = self.request.user
-    #     comment.ad = Ad.objects.get(pk=self.kwargs["ad_pk"])
-    #     comment.save()
+
