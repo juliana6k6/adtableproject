@@ -4,9 +4,9 @@ from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from ads.filters import AdFilter
-# from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from ads.models import Ad, Comment
+from ads.paginators import AdPaginator
 from ads.serializers import AdSerializer, AdDetailSerializer, CommentSerializer
 from users.permissions import IsAdmin, IsOwner
 
@@ -33,6 +33,7 @@ class AdListAPIView(generics.ListAPIView):
     queryset = Ad.objects.all()
     filter_backends = (DjangoFilterBackend,)
     filterset_class = AdFilter
+    pagination_class = AdPaginator
     permission_classes = [AllowAny]
 
 
