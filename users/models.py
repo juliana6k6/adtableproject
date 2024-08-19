@@ -1,5 +1,7 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+from users.managers import UserManager
 
 
 class UserRoles(models.TextChoices):
@@ -64,3 +66,6 @@ class User(AbstractUser):
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
+
+    objects = UserManager()
+    # менеджер объектов

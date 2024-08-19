@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -43,6 +44,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework_simplejwt",
+    "django_filters",
+    "djoser",
+    "drf_yasg",
+    "rest_framework.authtoken",
     "users",
     "ads",
 ]
@@ -138,3 +144,56 @@ AUTH_USER_MODEL = "users.User"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# фильтры
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    # авторизация для каждого эндпойнта пишется отдельно
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+}
+# Настройки JWT-токенов(вверху)
+# Настройки срока действия токенов
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
+
+# # Для аутентификации
+# DJOSER = {
+#     'SERIALIZERS': {
+#         'user_create': 'users.serializers.UserRegistrationSerializer'
+#     },
+#     'LOGIN_FIELD': 'email'
+# }
+DJOSER = {
+    "PERMISSIONS": {"user_create": ["rest_framework.permissions.AllowAny"]},
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
+    "PASSWORD_RESET_CONFIRM_URL": "/password/reset/confirm/{uid}/{token}",
+    "SET_PASSWORD_RETYPE": True,
+    "USER_CREATE_CONFIRM_RETYPE": True,
+    "TOKEN_MODEL": None,
+    "ACTIVATION_URL": "auth/verify/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": True,
+    "LOGIN_FIELD": "email",
+    "EMAIL": {
+        "password_reset": "users.email.PasswordResetEmail",
+    },
+}
+
+EMAIL_HOST = "smtp.yandex.ru"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+SERVER_EMAIL = "juliana8k@yandex.ru"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
