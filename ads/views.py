@@ -1,21 +1,20 @@
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, viewsets
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from ads.filters import AdFilter
-
 from ads.models import Ad, Comment
 from ads.paginators import AdPaginator
-from ads.serializers import AdSerializer, AdDetailSerializer, CommentSerializer
+from ads.serializers import AdDetailSerializer, AdSerializer, CommentSerializer
 from users.permissions import IsAdmin, IsOwner
-
 
 # Create your views here.
 
 
 class AdCreateAPIView(generics.CreateAPIView):
     """Контроллер создания объявлений"""
+
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
     permission_classes = [IsAuthenticated]
@@ -29,6 +28,7 @@ class AdCreateAPIView(generics.CreateAPIView):
 
 class AdListAPIView(generics.ListAPIView):
     """Контроллер для просмотра списка всех объявлений"""
+
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
     filter_backends = (DjangoFilterBackend,)
@@ -39,6 +39,7 @@ class AdListAPIView(generics.ListAPIView):
 
 class AdRetrieveAPIView(generics.RetrieveAPIView):
     """Контроллер для просмотра объявления"""
+
     serializer_class = AdDetailSerializer
     queryset = Ad.objects.all()
     permission_classes = [IsAuthenticated]
@@ -46,6 +47,7 @@ class AdRetrieveAPIView(generics.RetrieveAPIView):
 
 class AdUpdateAPIView(generics.UpdateAPIView):
     """Контроллер для изменения объявления"""
+
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
     permission_classes = [IsAuthenticated, IsOwner | IsAdmin]
@@ -53,6 +55,7 @@ class AdUpdateAPIView(generics.UpdateAPIView):
 
 class AdDestroyAPIView(generics.DestroyAPIView):
     """Контроллер для удаления объявления"""
+
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
     permission_classes = [IsAuthenticated, IsOwner | IsAdmin]
@@ -60,6 +63,7 @@ class AdDestroyAPIView(generics.DestroyAPIView):
 
 class MyAdListAPIView(generics.ListAPIView):
     """Контроллер для просмотра списка объявлений пользователя"""
+
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
@@ -73,6 +77,7 @@ class MyAdListAPIView(generics.ListAPIView):
 
 class CommentViewSet(viewsets.ModelViewSet):
     """Вьюсет для модели отзыва"""
+
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
@@ -89,18 +94,17 @@ class CommentViewSet(viewsets.ModelViewSet):
         ad = get_object_or_404(Ad, id=ad_pk)
         comment_list = ad.comment_ad.all()
         return comment_list
+
     # #comment_pk = self.kwargs.get('pk')
     # #serializer.save(author=self.request.user, ad=ad_for_comment, pk=comment_pk)
 
     def get_permissions(self):
         """Создавать и просматривать может любой авторизованный пользователь, а редактировать
         и удалять только владелец или админ"""
-        if self.action in ['create', 'list', 'retrieve']:
+        if self.action in ["create", "list", "retrieve"]:
             permission_classes = IsAuthenticated
             # аутентифицированный пользователь может создавать, просматривать список и или детально один комментарий
-        elif self.action in ['update', 'partial_update', 'destroy']:
+        elif self.action in ["update", "partial_update", "destroy"]:
             permission_classes = (IsAuthenticated, IsAdmin | IsOwner)
             # администратор или владелец может отредактировать или удалить
         return super().get_permissions()
-
-

@@ -5,6 +5,7 @@ from users.models import UserRoles
 
 class IsOwner(BasePermission):
     """Класс для проверки принадлежности продукта владельцу"""
+
     message = "Доступно владельцу"
 
     # разрешение на уровне объекта
@@ -16,17 +17,9 @@ class IsOwner(BasePermission):
 
 class IsAdmin(BasePermission):
     """Класс для проверки роли администратора"""
+
     message = "Доступно администраторам."
 
     # разрешение на уровне пользователя
     def has_permission(self, request, view):
         return request.user.role == UserRoles.ADMIN
-
-
-
-
-
-
-
-
-
