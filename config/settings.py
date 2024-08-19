@@ -154,7 +154,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    # авторизация для каждого эндпойнта пишется отдельно
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
 }
 # Настройки JWT-токенов(вверху)
 # Настройки срока действия токенов
@@ -186,3 +190,13 @@ DJOSER = {
          'password_reset': 'users.email.PasswordResetEmail',
     },
 }
+
+EMAIL_HOST = "smtp.yandex.ru"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+SERVER_EMAIL = "juliana8k@yandex.ru"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

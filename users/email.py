@@ -5,8 +5,8 @@ from templated_mail.mail import BaseEmailMessage
 from djoser import utils
 from djoser.conf import settings
 
-# TODO Задание со звездочкой. Здесь необходимо переместиться в исходный код
-# TODO Djoser и правильно переопределит адрес сервера (в нашем случае это localhost:3000)
+# to_do Задание со звездочкой. Здесь необходимо переместиться в исходный код
+# to_do Djoser и правильно переопределит адрес сервера (в нашем случае это localhost:3000)
 
 
 class PasswordResetEmail(BaseEmailMessage):
