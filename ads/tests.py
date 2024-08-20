@@ -3,8 +3,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from ads.models import Ad
-
-from ..users.models import User
+from users.models import User
 
 
 class AdViewSetsTestCase(APITestCase):
@@ -19,7 +18,7 @@ class AdViewSetsTestCase(APITestCase):
         self.ad = Ad.objects.create(title='test ad', author=self.user, price=10,
                                     description='test description')
 
-      def test_ad_create(self):
+    def test_ad_create(self):
         """Тестирование создания привычки"""
         url = reverse("ads:ad-create")
         data = {
@@ -38,7 +37,7 @@ class AdViewSetsTestCase(APITestCase):
 
     def test_retrieve_ad(self):
         """Тестирование просмотра информации об объявлении"""
-        url = reverse('ads:ads-detail', args=[self.ad.pk])
+        url = reverse('ads:ad-detail', args=[self.ad.pk])
         response = self.client.get(url)
         data = response.json()
         print(data)
@@ -47,7 +46,7 @@ class AdViewSetsTestCase(APITestCase):
 
     def test_update_ad(self):
         """Тестирование редактирования объявления"""
-        url = reverse('ads:ads-update', args=[self.ad.pk])
+        url = reverse('ads:ad-update', args=[self.ad.pk])
         data = {
             'title': 'update test ad2',
             'description': 'test description2'
