@@ -21,9 +21,11 @@ app_name = UsersConfig.name
 
 users_router.register("users", UserViewSet, basename="users")
 urlpatterns = [
-    path("login/", TokenObtainPairView.as_view(), name="login"),
+    path("token/", TokenObtainPairView.as_view(), name="token"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     # path("register/", UserCreateAPIView.as_view(), name="user_register"),
     path("", include(users_router.urls)),
     # по умолчанию path("api/", include('djoser.urls'))
+    # обратите внимание, что здесь в роутере мы регистрируем ViewSet,
+    # который импортирован из приложения Djoser
 ]

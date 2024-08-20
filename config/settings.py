@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django_filters",
     "djoser",
     "drf_yasg",
+    "corsheaders",
     "rest_framework.authtoken",
     "users",
     "ads",
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -86,6 +88,17 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv("POSTGRES_DB"),
+#         "USER": os.getenv("POSTGRES_USER"),
+#         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+#         "HOST": os.getenv("POSTGRES_HOST"),
+#         "PORT": os.getenv("POSTGRES_PORT"),
+#     }
+# }
 
 DATABASES = {
     "default": {
@@ -166,27 +179,25 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-# # Для аутентификации
-# DJOSER = {
-#     'SERIALIZERS': {
-#         'user_create': 'users.serializers.UserRegistrationSerializer'
-#     },
-#     'LOGIN_FIELD': 'email'
-# }
+# Для аутентификации
 DJOSER = {
-    "PERMISSIONS": {"user_create": ["rest_framework.permissions.AllowAny"]},
-    "PASSWORD_RESET_CONFIRM_RETYPE": True,
-    "PASSWORD_RESET_CONFIRM_URL": "/password/reset/confirm/{uid}/{token}",
-    "SET_PASSWORD_RETYPE": True,
-    "USER_CREATE_CONFIRM_RETYPE": True,
-    "TOKEN_MODEL": None,
-    "ACTIVATION_URL": "auth/verify/{uid}/{token}",
-    "SEND_ACTIVATION_EMAIL": True,
+    "SERIALIZERS": {"user_create": "users.serializers.UserRegistrationSerializer"},
     "LOGIN_FIELD": "email",
-    "EMAIL": {
-        "password_reset": "users.email.PasswordResetEmail",
-    },
 }
+# DJOSER = {
+#     "PERMISSIONS": {"user_create": ["rest_framework.permissions.AllowAny"]},
+#     "PASSWORD_RESET_CONFIRM_RETYPE": True,
+#     "PASSWORD_RESET_CONFIRM_URL": "/password/reset/confirm/{uid}/{token}",
+#     "SET_PASSWORD_RETYPE": True,
+#     "USER_CREATE_CONFIRM_RETYPE": True,
+#     "TOKEN_MODEL": None,
+#     "ACTIVATION_URL": "auth/verify/{uid}/{token}",
+#     "SEND_ACTIVATION_EMAIL": True,
+#     "LOGIN_FIELD": "email",
+#     "EMAIL": {
+#         "password_reset": "users.email.PasswordResetEmail",
+#     },
+# }
 
 EMAIL_HOST = "smtp.yandex.ru"
 EMAIL_PORT = 465
@@ -197,3 +208,19 @@ EMAIL_USE_SSL = True
 
 SERVER_EMAIL = "juliana8k@yandex.ru"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# CORS
+# CORS_ALLOWED_ORIGINS = [
+#     '<http://localhost:8000>',  # Замените на адрес вашего фронтенд-сервера
+#     "https://read-and-write.example.com",
+# # адреса, с которых можно заходить, второй дублируется
+# ]
+#
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://read-and-write.example.com",
+#  Замените на адрес вашего фронтенд-сервера
+#     # и добавьте адрес бэкенд-сервера
+#     # адрес админки
+# ]
+#
+# CORS_ALLOW_ALL_ORIGINS = False
