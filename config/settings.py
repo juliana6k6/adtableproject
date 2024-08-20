@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django_filters",
     "djoser",
     "drf_yasg",
+    "corsheaders",
     "rest_framework.authtoken",
     "users",
     "ads",
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -197,3 +199,19 @@ EMAIL_USE_SSL = True
 
 SERVER_EMAIL = "juliana8k@yandex.ru"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# CORS
+# CORS_ALLOWED_ORIGINS = [
+#     '<http://localhost:8000>',  # Замените на адрес вашего фронтенд-сервера
+#     "https://read-and-write.example.com",
+# # адреса, с которых можно заходить, второй дублируется
+# ]
+#
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://read-and-write.example.com",
+#  Замените на адрес вашего фронтенд-сервера
+#     # и добавьте адрес бэкенд-сервера
+#     # адрес админки
+# ]
+#
+# CORS_ALLOW_ALL_ORIGINS = False
