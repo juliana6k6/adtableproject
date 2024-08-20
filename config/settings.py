@@ -62,7 +62,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -181,10 +181,8 @@ SIMPLE_JWT = {
 
 # Для аутентификации
 DJOSER = {
-    'SERIALIZERS': {
-        'user_create': 'users.serializers.UserRegistrationSerializer'
-    },
-    'LOGIN_FIELD': 'email'
+    "SERIALIZERS": {"user_create": "users.serializers.UserRegistrationSerializer"},
+    "LOGIN_FIELD": "email",
 }
 # DJOSER = {
 #     "PERMISSIONS": {"user_create": ["rest_framework.permissions.AllowAny"]},

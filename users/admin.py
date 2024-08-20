@@ -14,5 +14,5 @@ class CategoryAdmin(admin.ModelAdmin):
         "phone_number",
         "avatar",
         "role",
-        "is_active"
+        "is_active",
     )
