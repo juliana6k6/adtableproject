@@ -179,27 +179,27 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-# # Для аутентификации
-# DJOSER = {
-#     'SERIALIZERS': {
-#         'user_create': 'users.serializers.UserRegistrationSerializer'
-#     },
-#     'LOGIN_FIELD': 'email'
-# }
+# Для аутентификации
 DJOSER = {
-    "PERMISSIONS": {"user_create": ["rest_framework.permissions.AllowAny"]},
-    "PASSWORD_RESET_CONFIRM_RETYPE": True,
-    "PASSWORD_RESET_CONFIRM_URL": "/password/reset/confirm/{uid}/{token}",
-    "SET_PASSWORD_RETYPE": True,
-    "USER_CREATE_CONFIRM_RETYPE": True,
-    "TOKEN_MODEL": None,
-    "ACTIVATION_URL": "auth/verify/{uid}/{token}",
-    "SEND_ACTIVATION_EMAIL": True,
-    "LOGIN_FIELD": "email",
-    "EMAIL": {
-        "password_reset": "users.email.PasswordResetEmail",
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserRegistrationSerializer'
     },
+    'LOGIN_FIELD': 'email'
 }
+# DJOSER = {
+#     "PERMISSIONS": {"user_create": ["rest_framework.permissions.AllowAny"]},
+#     "PASSWORD_RESET_CONFIRM_RETYPE": True,
+#     "PASSWORD_RESET_CONFIRM_URL": "/password/reset/confirm/{uid}/{token}",
+#     "SET_PASSWORD_RETYPE": True,
+#     "USER_CREATE_CONFIRM_RETYPE": True,
+#     "TOKEN_MODEL": None,
+#     "ACTIVATION_URL": "auth/verify/{uid}/{token}",
+#     "SEND_ACTIVATION_EMAIL": True,
+#     "LOGIN_FIELD": "email",
+#     "EMAIL": {
+#         "password_reset": "users.email.PasswordResetEmail",
+#     },
+# }
 
 EMAIL_HOST = "smtp.yandex.ru"
 EMAIL_PORT = 465
