@@ -2,15 +2,9 @@ from django.urls import path
 from rest_framework.routers import SimpleRouter
 
 from ads.apps import AdsConfig
-from ads.views import (
-    AdCreateAPIView,
-    AdDestroyAPIView,
-    AdListAPIView,
-    AdRetrieveAPIView,
-    AdUpdateAPIView,
-    CommentViewSet,
-    MyAdListAPIView,
-)
+from ads.views import (AdCreateAPIView, AdDestroyAPIView, AdListAPIView,
+                       AdRetrieveAPIView, AdUpdateAPIView, CommentViewSet,
+                       MyAdListAPIView)
 
 app_name = AdsConfig.name
 
