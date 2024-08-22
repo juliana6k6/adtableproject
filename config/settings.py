@@ -89,6 +89,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# настройки для докера
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -99,7 +100,7 @@ DATABASES = {
         "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
-
+# настройки для запуска проекта на локальной машине
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
