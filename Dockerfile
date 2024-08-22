@@ -2,7 +2,7 @@
 FROM python:3
 
 # Создаем рабочую директорию
-WORKDIR / habits
+WORKDIR / adtableproject
 
 # Копируем в рабочую директорию файл с зависимостями проекта
 COPY ./requirements.txt .
