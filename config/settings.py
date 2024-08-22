@@ -182,6 +182,7 @@ SIMPLE_JWT = {
 # Для аутентификации
 DJOSER = {
     "SERIALIZERS": {"user_create": "users.serializers.UserRegistrationSerializer"},
+    "PASSWORD_RESET_CONFIRM_URL": "/password/reset/confirm/{uid}/{token}",
     "LOGIN_FIELD": "email",
 }
 # DJOSER = {
