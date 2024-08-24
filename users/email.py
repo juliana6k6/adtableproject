@@ -1,10 +1,11 @@
-from django.contrib.auth.tokens import default_token_generator
-from djoser import utils
-from djoser.conf import settings
+# from django.contrib.auth.tokens import default_token_generator
+# from djoser import utils
+# from djoser.conf import settings
 from templated_mail.mail import BaseEmailMessage
 
 # to_do Задание со звездочкой. Здесь необходимо переместиться в исходный код
-# to_do Djoser и правильно переопределит адрес сервера (в нашем случае это localhost:3000)
+# to_do Djoser и правильно переопределит адрес сервера
+# (в нашем случае это localhost:3000)
 
 
 class PasswordResetEmail(BaseEmailMessage):
