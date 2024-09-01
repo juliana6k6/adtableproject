@@ -9,7 +9,8 @@ class UserManager(BaseUserManager):
     """
 
     def create_user(
-        self, email, first_name, last_name, phone_number, role="user", password=None
+        self, email, first_name, last_name, phone_number, role="user",
+            password=None
     ):
         if not email:
             raise ValueError("Users must have an email address")
@@ -28,11 +29,12 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(
-        self, email, first_name, last_name, phone_number=None, password=None
+        self, email, first_name, last_name, phone_number=None,
+            password=None
     ):
         """
-        Функция для создания суперпользователя — с ее помощью мы создаем админинстратора
-        это можно сделать с помощью команды createsuperuser
+        Функция для создания суперпользователя — с ее помощью мы создаем
+        администратора это можно сделать с помощью команды createsuperuser
         """
 
         user = self.create_user(

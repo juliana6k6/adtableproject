@@ -9,7 +9,7 @@ class UserRoles(models.TextChoices):
     """Роли пользователя:
     user - может получать список объявлений, получать одно объявление, создавать объявление,
     редактировать и удалять свое объявление, получать список комментариев, создавать комментарии,
-    редактировать/удалять свои комментарии.
+    редактировать/удалять свои комментарии;
     admin - может дополнительно к правам пользователя редактировать или удалять объявления и
     комментарии любых других пользователей.
     """
@@ -52,7 +52,8 @@ class User(AbstractUser):
         help_text="Загрузите аватар",
     )
     email = models.EmailField(
-        unique=True, verbose_name="Email", help_text="Укажите электронную почту"
+        unique=True, verbose_name="Email",
+        help_text="Укажите электронную почту"
     )
     role = models.CharField(
         max_length=10,
@@ -75,6 +76,7 @@ class User(AbstractUser):
 
     objects = UserManager()
     # менеджер объектов
+
     def save(self, *args, **kwargs):
         if 'pbkdf2_sha256' not in self.password:
             password = make_password(self.password)
