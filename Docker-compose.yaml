@@ -1,7 +1,5 @@
 version: '3'
-
 services:
-
   db:
     image: postgres
     restart: on-failure
@@ -17,7 +15,6 @@ services:
       interval: 10s
       retries: 5
       timeout: 5s
-
   app:
     build: .
     tty: true
@@ -31,7 +28,5 @@ services:
         condition: service_healthy
     volumes:
       - .:/app
-
-
 volumes:
   pg_data:
